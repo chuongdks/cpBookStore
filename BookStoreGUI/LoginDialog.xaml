@@ -1,0 +1,32 @@
+﻿<Window x:Class="BookStoreGUI.LoginDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStoreGUI"
+        mc:Ignorable="d"
+        Title="Login" Height="150" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Margin="2" Content="User Name" />
+        <TextBox Name="nameTextBox" Grid.Column="1" Grid.Row="0" Margin="2"/>
+        <Label Grid.Column="0" Grid.Row="1" Margin="2" Content="Password" />
+        <PasswordBox Name="passwordTextBox" Grid.Column="1" Grid.Row="1" Margin="2"/>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" 
+                    Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="okButton" Click="OkButton_Click" IsDefault="True" 
+                    MinWidth="80" Margin="0,10,5,5" Content="OK"/>
+            <Button Name="cancelButton" Click="CancelButton_Click" IsDefault="True" 
+                    MinWidth="80" Margin="40,10,5,5" Content="Cancel"/>
+        </StackPanel>
+    </Grid>
+</Window>
