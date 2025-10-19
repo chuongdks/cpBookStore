@@ -7,3 +7,12 @@ D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreDATA\obj\Debug\BookStoreDATA
 D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreDATA\obj\Debug\BookStoreDATA.csproj.CoreCompileInputs.cache
 D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreDATA\obj\Debug\BookStoreDATA.dll
 D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreDATA\obj\Debug\BookStoreDATA.pdb
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\bin\Debug\BookStoreDATA.dll.config
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\bin\Debug\BookStoreDATA.dll
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\bin\Debug\BookStoreDATA.pdb
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.csproj.AssemblyReference.cache
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.Properties.Resources.resources
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.csproj.GenerateResource.cache
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.csproj.CoreCompileInputs.cache
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.dll
+D:\Project\C#\COMP-4220_Personal\BookStoreDATA\obj\Debug\BookStoreDATA.pdb

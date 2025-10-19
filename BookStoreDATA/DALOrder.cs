@@ -17,14 +17,14 @@ namespace BookStoreDATA
             // SQL stuff
             try
             {
-                // 
+                // create a Store Procedure name "down_PlaceOrder"
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "down_PlaceOrder";
+                cmd.CommandText = "insertOrder";
 
                 // 
                 SqlParameter inParameter = new SqlParameter();
-                inParameter.ParameterName = "@xmlOrder";
+                inParameter.ParameterName = "@xml";
                 inParameter.Value = xmlOrder;
                 inParameter.DbType = DbType.String;
                 inParameter.Direction = ParameterDirection.Input;

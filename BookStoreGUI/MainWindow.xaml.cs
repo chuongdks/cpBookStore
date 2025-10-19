@@ -123,7 +123,6 @@ namespace BookStoreGUI
             }
         }
 
-
         private void chechoutButton_Click(object sender, RoutedEventArgs e) 
         {
             // 

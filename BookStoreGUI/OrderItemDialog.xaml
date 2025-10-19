@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookStoreGUI"
         mc:Ignorable="d"
-        Title="OrderItemDialog" Height="Auto" Width="300">
+        Title="OrderItemDialog" Height="250" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
