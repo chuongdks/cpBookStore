@@ -24,12 +24,48 @@ namespace BookStoreGUI
         DataSet dsBookCat;
         UserData userData;
         BookOrder bookOrder;
+        BookCatalog bookCatalog;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        // Helper method to Refresh the GUI
+        private void UpdateBookCatalogView()
+        {
+            // Call the Business Logic Layer to get the fresh data
+            DataSet dsBookInfo = bookCatalog.GetBookInfo();
+
+            // Set the data set as the DataContext for the main view elements.
+            this.LayoutRoot.DataContext = dsBookInfo;
+
+            // Explicitly rebind the ItemsSource for the ComboBox.
+            this.categoriesComboBox.ItemsSource = dsBookInfo.Tables["Category"].DefaultView;
+
+            // NOTE: If you have a separate list/data grid for books, you might rebind it here:
+            // Example:
+            // this.booksDataGrid.ItemsSource = dsBookInfo.Tables["BookData"].DefaultView;
+
+            // Optional: Reset the selected item in the ComboBox to the first item
+            if (this.categoriesComboBox.Items.Count > 0)
+            {
+                this.categoriesComboBox.SelectedIndex = 0;
+            }
+        }
+        //
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            bookCatalog = new BookCatalog();
+            dsBookCat = bookCatalog.GetBookInfo();
+            this.DataContext = dsBookCat.Tables["Category"].DefaultView;
+
+            bookOrder = new BookOrder();
+            userData = new UserData();
+            this.orderListView.ItemsSource = bookOrder.OrderItemList;
+        }
+        
+        //
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
             // Open the Login Dialog Box
@@ -37,7 +73,7 @@ namespace BookStoreGUI
             dlg.Owner = this;
             dlg.ShowDialog();
 
-            // 
+            // Fill login info based on Login Dialog
             string username = dlg.nameTextBox.Text;
             string password = dlg.passwordTextBox.Password;
 
@@ -65,23 +101,14 @@ namespace BookStoreGUI
                 }
             }
         }
-
+        
+        //
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) 
-        {
-            BookCatalog bookCat = new BookCatalog();
-            dsBookCat = bookCat.GetBookInfo();
-            this.DataContext = dsBookCat.Tables["Category"].DefaultView;
-
-            bookOrder = new BookOrder();
-            userData = new UserData();
-            this.orderListView.ItemsSource = bookOrder.OrderItemList;
-        }
-
+        
+        //
         private void addButton_Click(object sender, RoutedEventArgs e) 
         {
             OrderItemDialog orderItemDialog = new OrderItemDialog();
@@ -113,7 +140,8 @@ namespace BookStoreGUI
                 bookOrder.AddItem(new OrderItem(isbn, title, unitPrice, quantity));
             }
         }
-
+        
+        //
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.orderListView.SelectedItem != null)
@@ -122,7 +150,59 @@ namespace BookStoreGUI
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
             }
         }
+        
+        //
+        private void insertBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create and show the data entry form
+            AddBookDialog bookdlg = new AddBookDialog();
+            bookdlg.Owner = this;
+            bookdlg.ShowDialog();
 
+            // ShowDialog() blocks the parent window until the dialog is closed.
+            if (bookdlg.DialogResult == true)
+            {
+                try
+                {
+                    // 2. Retrieve validated data from the dialog
+                    string isbn = bookdlg.isbnTextBox.Text;                         // Primary Key
+                    int categoryId = int.Parse(bookdlg.categoryTextBox.Text);       // Foreign Key
+                    string title = bookdlg.titleTextBox.Text;
+                    string author = bookdlg.authorTextBox.Text;
+                    double price = double.Parse(bookdlg.priceTextBox.Text);
+                    int supplierId = int.Parse(bookdlg.supplierIDTextBox.Text);     // Foreign Key
+                    string year = bookdlg.yearTextBox.Text;
+                    string edition = bookdlg.editionTextBox.Text;
+                    string publisher = bookdlg.publisherTextBox.Text;
+                    int inStock = int.Parse(bookdlg.inStockTextBox.Text);
+
+                    // 3. Call the Business Logic Layer
+                    // This calls BookCatalog.AddNewBook( ... )
+                    if (bookCatalog.AddNewBook(isbn, categoryId, title, author, price, supplierId, year, edition, publisher, inStock))
+                    {
+                        MessageBox.Show($"Book '{title}' successfully added to the catalog.", "Success");
+
+                        // Update/Refresh GUI view
+                        UpdateBookCatalogView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to add book. Check validation rules or contact IT.", "Error");
+                    }
+                }
+                catch (FormatException)
+                {
+                    // Catch cases where dialog input was non-numeric for fields like Price, InStock, etc.
+                    MessageBox.Show("Please ensure all numeric fields are entered correctly.", "Input Error");
+                }
+                catch (Exception ex)
+                {
+                    // Catches any unexpected system error during the process
+                    MessageBox.Show($"An unexpected error occurred: {ex.Message}", "System Error");
+                }
+            }
+        }
+        //
         private void chechoutButton_Click(object sender, RoutedEventArgs e) 
         {
             // 

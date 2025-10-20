@@ -5,6 +5,7 @@
     <Grid>
         <StackPanel x:Name="LayoutRoot" DataContext="{Binding}"
 	    Orientation="Vertical" HorizontalAlignment="Left" Height="auto" Width="auto">
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Label Content="Categories:" Margin="18,0,0,0"/>
                 <ComboBox ItemsSource="{Binding}" x:Name="categoriesComboBox"
@@ -21,6 +22,7 @@
                 <Button Content="Exit" Height="25" x:Name="exitButton"
 		    Width="75" Margin="20,2,0,0" Click="exitButton_Click" />
             </StackPanel>
+
             <DataGrid AutoGenerateColumns="False" Height="165" 
 		ItemsSource="{Binding drCat_Book}"
 		x:Name="ProductsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
@@ -41,6 +43,7 @@
 			Header="Year" Width="8*" />
                 </DataGrid.Columns>
             </DataGrid>
+
             <StackPanel Orientation="Vertical">
                 <ListView x:Name="orderListView" MinHeight="150" Width="490"
 		    ItemsSource="{Binding}" SelectionMode="Single">
@@ -58,17 +61,26 @@
                     </ListView.View>
                 </ListView>
             </StackPanel>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button x:Name="addButton" MinHeight="25" MinWidth="80"
 		    Content="Add Book" Click="addButton_Click" />
+
                 <Button x:Name="removeButton" MinHeight="25" MinWidth="80"
 		    Content="Remove Book" Click="removeButton_Click" />
+
+                <Button x:Name="addBookButton" MinHeight="25" MinWidth="80"
+		    Content="Add Book to DB" Click="insertBookButton_Click"/>
+
                 <Button x:Name="checkoutOrderButton" MinHeight="25" MinWidth="80"
 		    Content="Proceed to Checkout" Click="chechoutButton_Click" Width="121" Margin="286,0,0,0"/>
             </StackPanel>
+
         </StackPanel>
+
         <StatusBar VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <TextBlock x:Name="statusTextBlock"><Run Text="Please login before proceeding to checkout."/></TextBlock>
         </StatusBar>
+
     </Grid>
 </Window>

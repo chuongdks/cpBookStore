@@ -45,12 +45,14 @@ D:\Project\C#\COMP-4220_Personal\BookStoreGUI\bin\Debug\BookStoreLIB.pdb
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI.csproj.AssemblyReference.cache
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\MainWindow.baml
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\AddBookDialog.g.cs
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\LoginDialog.g.cs
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\MainWindow.g.cs
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\OrderItemDialog.g.cs
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\App.g.cs
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI_MarkupCompile.cache
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI_MarkupCompile.lref
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\AddBookDialog.baml
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\LoginDialog.baml
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\OrderItemDialog.baml
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI.g.resources

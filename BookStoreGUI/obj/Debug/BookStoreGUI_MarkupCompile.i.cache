@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreGUI\obj\Debug\
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\
 BookStoreGUI
 none
 false
 DEBUG;TRACE
-D:\Project\C#\COMP-4220\COMP4220_Agile3F25\BookStoreGUI\App.xaml
-3-1005567013
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\App.xaml
+4-1041385113
 
-8-998951019
-151673129931
-LoginDialog.xaml;MainWindow.xaml;OrderItemDialog.xaml;
+9-1561995327
+151001529731
+AddBookDialog.xaml;LoginDialog.xaml;MainWindow.xaml;OrderItemDialog.xaml;
 
 True
 
