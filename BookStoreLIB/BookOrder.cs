@@ -63,7 +63,7 @@ namespace BookStoreLIB
             }
         }
 
-        // 
+        // place order in xml form
         public int PlaceOrder(int userID)
         {
             string xmlOrder;
@@ -73,6 +73,12 @@ namespace BookStoreLIB
                 xmlOrder += item.ToString();
             }
             xmlOrder += "</Order>";
+
+            // complete xml form example:
+            //< Order UserID = '5' >
+            //    < OrderItem ISBN = '12345' Quantity = '2' />
+            //    < OrderItem ISBN = '67890' Quantity = '1' />
+            //</ Order >
 
             DALOrder dbOrder = new DALOrder();
             return dbOrder.Proceed2Order(xmlOrder);

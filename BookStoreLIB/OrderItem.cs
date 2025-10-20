@@ -38,7 +38,7 @@ namespace BookStoreLIB
         public override string ToString()
         {
             string xml = "<OrderItem ISBN='" + BookID + "'";
-            xml += " Quantity='" + Quantity + "' />";
+            xml += " Quantity='" + Quantity + "' />";   //    < OrderItem ISBN = '67890' Quantity = '1' />
             return xml;
         }
     }

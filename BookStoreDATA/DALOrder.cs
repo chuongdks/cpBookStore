@@ -17,12 +17,12 @@ namespace BookStoreDATA
             // SQL stuff
             try
             {
-                // create a Store Procedure name "down_PlaceOrder"
+                // create a Store Procedure name "insertOrder"
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "insertOrder";
 
-                // 
+                // Input Parameter for the XML Data
                 SqlParameter inParameter = new SqlParameter();
                 inParameter.ParameterName = "@xml";
                 inParameter.Value = xmlOrder;
@@ -31,14 +31,14 @@ namespace BookStoreDATA
 
                 cmd.Parameters.Add(inParameter);
 
-                //
+                // Return Parameter
                 SqlParameter ReturnParameter = new SqlParameter();
                 ReturnParameter.ParameterName = "@OrderID";
                 ReturnParameter.Direction = ParameterDirection.ReturnValue;
 
                 cmd.Parameters.Add(ReturnParameter);
 
-                // 
+                // execute the query
                 cn.Open();
                 cmd.ExecuteNonQuery();
                 cn.Close();

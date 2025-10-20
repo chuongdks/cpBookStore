@@ -17,6 +17,7 @@ namespace BookStoreDATA
             conn = new SqlConnection(Properties.Settings.Default.cpConnection);
         }
 
+        // Method to get the book info and catalog when MainWindow is loaded
         public DataSet GetBookInfo() {
             // sql stuff
             try
@@ -55,6 +56,44 @@ namespace BookStoreDATA
                 Debug.WriteLine(ex.Message);
             }
             return dsBooks;
+        }
+
+        // Method to call the 'insertBook' stored procedure
+        public bool InsertBook(string xmlBook)
+        {
+            try
+            {
+                // create a Store Procedure name "insertBook"
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insertBook";
+
+                // Input Parameter for the XML Data
+                SqlParameter inParameter = new SqlParameter();
+                inParameter.ParameterName = "@xml"; 
+                inParameter.Value = xmlBook;
+                inParameter.DbType = DbType.String;
+                inParameter.Direction = ParameterDirection.Input;
+
+                cmd.Parameters.Add(inParameter);
+
+                // execute the query
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();   // should return 1 affected row for the book insert
+                conn.Close();
+
+                // return bool check 
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open) conn.Close();
+            }
         }
     }
 }
