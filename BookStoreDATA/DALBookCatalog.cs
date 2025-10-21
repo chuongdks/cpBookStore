@@ -85,6 +85,12 @@ namespace BookStoreDATA
                 // return bool check 
                 return rowsAffected > 0;
             }
+            catch (SqlException ex)
+            {
+                // CRUCIAL: Catches database-specific errors (e.g., duplicate ISBN)
+                Debug.WriteLine("SQL Error during book insertion: " + ex.Message);
+                return false;
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());

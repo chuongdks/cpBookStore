@@ -35,17 +35,8 @@ namespace BookStoreGUI
         private void UpdateBookCatalogView()
         {
             // Call the Business Logic Layer to get the fresh data
-            DataSet dsBookInfo = bookCatalog.GetBookInfo();
-
-            // Set the data set as the DataContext for the main view elements.
-            this.LayoutRoot.DataContext = dsBookInfo;
-
-            // Explicitly rebind the ItemsSource for the ComboBox.
-            this.categoriesComboBox.ItemsSource = dsBookInfo.Tables["Category"].DefaultView;
-
-            // NOTE: If you have a separate list/data grid for books, you might rebind it here:
-            // Example:
-            // this.booksDataGrid.ItemsSource = dsBookInfo.Tables["BookData"].DefaultView;
+            dsBookCat = bookCatalog.GetBookInfo();
+            this.DataContext = dsBookCat.Tables["Category"].DefaultView;
 
             // Optional: Reset the selected item in the ComboBox to the first item
             if (this.categoriesComboBox.Items.Count > 0)
@@ -53,7 +44,7 @@ namespace BookStoreGUI
                 this.categoriesComboBox.SelectedIndex = 0;
             }
         }
-        //
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             bookCatalog = new BookCatalog();
