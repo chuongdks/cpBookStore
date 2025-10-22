@@ -17,12 +17,19 @@ namespace BookStoreDATA
             conn = new SqlConnection(Properties.Settings.Default.cpConnection);
         }
 
+        // Overload 1: For initial load (no search term)
+        public DataSet GetBookInfo()
+        {
+            return GetBookInfo(null);
+        }
+
         // Method to get the book info and catalog when MainWindow is loaded
-        public DataSet GetBookInfo() {
+        public DataSet GetBookInfo(string searchTerm) {
             // sql stuff
             try
             {
                 dsBooks = new DataSet("Books");
+
                 // Query for Category Table
                 String strSQL =
                 "SELECT CategoryID, Name, Description " +
@@ -33,13 +40,22 @@ namespace BookStoreDATA
                 SqlDataAdapter daCategory = new SqlDataAdapter(cmdSelCategory);                
                 daCategory.Fill(dsBooks, "Category");   // Create new DataTable named "Category" inside the DataSet "dsBooks"
 
-                // Query for BookData Table 
+                // Query for BookData Table - WITH A SEARCH FILTER!
                 String strSQL2 =
                 "SELECT ISBN, CategoryID, Title, Author, Price, SupplierId, Year, Edition, Publisher " +
-                "FROM BookData";
+                "FROM BookData ";
+                // DYNAMIC SQL FILTER LOGIC HERE
+                if (!string.IsNullOrWhiteSpace(searchTerm))
+                {
+                    // Use LIKE and wildcards (%) to search for the term in ISBN, Title, and Author - Future: Search Price and Year with >,<,=
+                    strSQL2 += "WHERE ISBN LIKE @SearchTerm " +
+                               "OR Title LIKE @SearchTerm " +
+                               "OR Author LIKE @SearchTerm ";
+                }
 
                 // Assign Query and Connection
-                SqlCommand cmdSelBook = new SqlCommand(strSQL2, conn);
+                SqlCommand cmdSelBook = new SqlCommand(strSQL2, conn);                
+                cmdSelBook.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");  // Add the searchTerm with wildcard pattern
                 SqlDataAdapter daBook = new SqlDataAdapter(cmdSelBook);
                 daBook.Fill(dsBooks, "BookData");       // Create new DataTable named "BookData" inside the DataSet "dsBooks"
 

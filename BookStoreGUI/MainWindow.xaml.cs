@@ -194,6 +194,7 @@ namespace BookStoreGUI
                 }
             }
         }
+
         //
         private void chechoutButton_Click(object sender, RoutedEventArgs e) 
         {
@@ -205,6 +206,33 @@ namespace BookStoreGUI
                 int orderID;
                 orderID = bookOrder.PlaceOrder(userData.UserID);
                 MessageBox.Show("Your order has been placed. Your order id is: " + orderID.ToString());
+            }
+        }
+
+        // Search button click
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchTerm = searchTextBox.Text;
+
+            // Optional (not reset the category box to index 0) Save the current category selection
+            int previousSelectedIndex = categoriesComboBox.SelectedIndex;
+
+            // Business Logic part
+            dsBookCat = bookCatalog.SearchBooks(searchTerm);
+
+            // Update/Refresh GUI view - similar to UpdateBookCatalogView() but no GetBookInfo()
+            this.DataContext = dsBookCat.Tables["Category"].DefaultView;
+
+            // Provide feedback
+            if (dsBookCat.Tables["BookData"].Rows.Count == 0 && !string.IsNullOrWhiteSpace(searchTerm))
+            {
+                MessageBox.Show($"No books found matching '{searchTerm}'.", "Search Results");
+            }
+
+            // Optional (not reset the category box to index 0) resotre previous category selection
+            if (categoriesComboBox.Items.Count > previousSelectedIndex)
+            {
+                categoriesComboBox.SelectedIndex = previousSelectedIndex;
             }
         }
     }

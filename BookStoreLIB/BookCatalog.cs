@@ -59,5 +59,22 @@ namespace BookStoreLIB
                 return false;
             }
         }
+
+        // Search method
+        public DataSet SearchBooks(string searchTerm)
+        {
+            string trimmedTerm = searchTerm.Trim();
+
+            // Check if the search term is empty after trimming
+            if (string.IsNullOrWhiteSpace(trimmedTerm))
+            {
+                // If empty, return the full list of books
+                return GetBookInfo();
+            }
+
+            // Call DAL to get filtered data
+            DALBookCatalog bookCatalog = new DALBookCatalog();
+            return bookCatalog.GetBookInfo(trimmedTerm);
+        }
     }
 }
