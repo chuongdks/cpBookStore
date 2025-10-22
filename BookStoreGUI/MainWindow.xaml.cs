@@ -48,12 +48,13 @@ namespace BookStoreGUI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             bookCatalog = new BookCatalog();
-            dsBookCat = bookCatalog.GetBookInfo();
-            this.DataContext = dsBookCat.Tables["Category"].DefaultView;
-
             bookOrder = new BookOrder();
             userData = new UserData();
-            this.orderListView.ItemsSource = bookOrder.OrderItemList;
+
+            dsBookCat = bookCatalog.GetBookInfo();
+            this.DataContext = dsBookCat.Tables["Category"].DefaultView;    // Set the DataContext part to use dsBookCat's "Category" Table    
+
+            this.orderListView.ItemsSource = bookOrder.OrderItemList;       // Set the ItemSource to use ObservableCollection of "orderItemList"
         }
         
         //
@@ -106,7 +107,7 @@ namespace BookStoreGUI
             DataRowView selectedRow;
 
             // Get the currently selected row from the data grid
-            selectedRow = (DataRowView)this.ProductsDataGrid.SelectedItem;
+            selectedRow = (DataRowView)this.ProductsDataGrid.SelectedItem;  // choose info row from the ProductsDataGrid
 
             // Check if a row was actually selected
             if (selectedRow == null)

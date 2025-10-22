@@ -31,7 +31,7 @@ namespace BookStoreDATA
                 // Assign Query and Connection
                 SqlCommand cmdSelCategory = new SqlCommand(strSQL, conn);
                 SqlDataAdapter daCategory = new SqlDataAdapter(cmdSelCategory);                
-                daCategory.Fill(dsBooks, "Category");   // Get category info
+                daCategory.Fill(dsBooks, "Category");   // Create new DataTable named "Category" inside the DataSet "dsBooks"
 
                 // Query for BookData Table 
                 String strSQL2 =
@@ -41,15 +41,15 @@ namespace BookStoreDATA
                 // Assign Query and Connection
                 SqlCommand cmdSelBook = new SqlCommand(strSQL2, conn);
                 SqlDataAdapter daBook = new SqlDataAdapter(cmdSelBook);
-                daBook.Fill(dsBooks, "BookData");          // Get Books info
+                daBook.Fill(dsBooks, "BookData");       // Create new DataTable named "BookData" inside the DataSet "dsBooks"
 
                 // Data Relation
-                DataColumn parentColumn = dsBooks.Tables["Category"].Columns["CategoryID"];
-                DataColumn childColumn = dsBooks.Tables["BookData"].Columns["CategoryID"];
+                DataColumn parentColumn = dsBooks.Tables["Category"].Columns["CategoryID"];     // The unique identifier (the "One" side)
+                DataColumn childColumn = dsBooks.Tables["BookData"].Columns["CategoryID"];      // The foreign key (the "Many" side)
 
-                DataRelation drCat_Book = new DataRelation("drCat_Book", parentColumn, childColumn, false);
+                DataRelation drCat_Book = new DataRelation("drCat_Book", parentColumn, childColumn, false);     // create the Data Relation
 
-                dsBooks.Relations.Add(drCat_Book);      // Set up the table relation
+                dsBooks.Relations.Add(drCat_Book);      // Finally add the relation in the DataSet
             }
             catch (Exception ex)
             {

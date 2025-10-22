@@ -11,7 +11,7 @@ namespace BookStoreLIB
 {
     public class BookCatalog
     {
-        // get book info and catalog when main program is loaded
+        // get the datasets that has BookData, CAtegory and its Relation
         public DataSet GetBookInfo()
         {
             // perform any business logic before passing to client
