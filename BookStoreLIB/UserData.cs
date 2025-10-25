@@ -9,6 +9,7 @@ namespace BookStoreLIB
         public string UserName { get; set; }
         public string Password { get; set; }
 
+        // Validate username and password rules
         public string ValidateLogIn(string userName, string password)
         {
             // First check: Empty boxes
@@ -63,6 +64,7 @@ namespace BookStoreLIB
             return null;
         }
 
+        // Check if user info is in the db
         public bool LogIn(string userName, string password)
         {
             // Password valid, check for Correct User Name and Password
@@ -75,6 +77,26 @@ namespace BookStoreLIB
                 return true;
             }
             else { return false; }
+        }
+
+        // Register new user
+        public string RegisterUser(string userName, string password, string fullName)
+        {
+            // Validate the username and password rules
+            string validationError = ValidateLogIn(userName, password);
+            if (validationError != null)    // return null if both dont break teh rule
+            {
+                return validationError; // Return specific validation error
+            }
+
+            // DAL part
+            DALUserInfo dbUser = new DALUserInfo();
+            if (dbUser.InsertUser(userName, password, fullName)) {
+                return null;    // Registration success
+            }
+            else {
+                return "Registration failed. User name is already taken or other error";
+            }
         }
     }
 }

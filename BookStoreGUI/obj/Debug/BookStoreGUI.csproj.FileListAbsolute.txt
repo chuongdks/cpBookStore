@@ -63,3 +63,5 @@ D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStor.83DA4C2E.Up2Dat
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI.exe
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI.pdb
 D:\Project\C#\COMP-4220_Personal\BookStoreGUI\obj\Debug\BookStoreGUI.exe.config
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\Project\C#\COMP-4220_Personal\BookStoreGUI\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
