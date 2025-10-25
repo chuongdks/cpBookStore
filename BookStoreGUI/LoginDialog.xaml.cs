@@ -35,5 +35,17 @@ namespace BookStoreGUI
         {
             this.DialogResult = false;
         }
+
+        private void registerButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterDialog dlg = new RegisterDialog();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+
+            if (dlg.DialogResult == true)
+            {
+                passwordTextBox.Clear();
+            }
+        }
     }
 }
