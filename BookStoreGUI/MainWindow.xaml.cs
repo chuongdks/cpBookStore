@@ -235,5 +235,43 @@ namespace BookStoreGUI
                 categoriesComboBox.SelectedIndex = previousSelectedIndex;
             }
         }
+
+        // search year button
+        private void searchYearButton_Click(object sender, RoutedEventArgs e)
+        {
+            string targetYear = yearTextBox.Text.Trim();
+            string selectedOperator =  ((ComboBoxItem)yearOperatorComboBox.SelectedItem).Content.ToString();
+
+            // input validation
+            if (!int.TryParse(targetYear, out int year) || targetYear.Length != 4) {
+                MessageBox.Show("Please enter a valid 4 digit year", "Input Error");
+                yearTextBox.Focus();
+                return;
+            }
+
+            try
+            {
+                // Business layer
+                dsBookCat = bookCatalog.SearchBooksByYear(selectedOperator, targetYear);
+
+                // Update/Refresh GUI view - similar to UpdateBookCatalogView() but no GetBookInfo()
+                this.DataContext = dsBookCat.Tables["Category"].DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Search failed: {ex.Message}", "Error");
+            }
+        }
+
+        // Clear Search button click
+        private void clearSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset the search controls
+            yearTextBox.Clear();
+            yearOperatorComboBox.SelectedIndex = 0;
+
+            // Refresh the main catalog view by calling your helper method
+            UpdateBookCatalogView();
+        }
     }
 }

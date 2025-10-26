@@ -30,6 +30,22 @@
                 <Button Content="Search" x:Name="searchButton" Width="75" Margin="5" Click="searchButton_Click" />
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="18,10,0,0">
+                <Label Content="Year:" Margin="0" VerticalAlignment="Center"/>
+
+                <ComboBox x:Name="yearOperatorComboBox" Width="80" Margin="5,0" SelectedIndex="0">
+                    <ComboBoxItem Content="In"/>
+                    <ComboBoxItem Content="Before"/>
+                    <ComboBoxItem Content="After"/>
+                </ComboBox>
+
+                <TextBox x:Name="yearTextBox" Width="60" Margin="5,0"/>
+
+                <Button Content="Search Year" x:Name="searchYearButton" Click="searchYearButton_Click" Margin="10,0,0,0" MinWidth="80"/>
+
+                <Button Content="Clear Search" x:Name="clearSearchButton" Click="clearSearchButton_Click" Margin="5,0,0,0" MinWidth="80"/>
+            </StackPanel>
+
             <DataGrid AutoGenerateColumns="False" Height="165" 
 		ItemsSource="{Binding drCat_Book}"
 		x:Name="ProductsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"

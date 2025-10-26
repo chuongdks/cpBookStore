@@ -76,5 +76,19 @@ namespace BookStoreLIB
             DALBookCatalog bookCatalog = new DALBookCatalog();
             return bookCatalog.GetBookInfo(trimmedTerm);
         }
+
+        // Search books by year
+        public DataSet SearchBooksByYear(string yearOperator, string targetYear)
+        {
+            // Basic validation
+            if (string.IsNullOrWhiteSpace(yearOperator) || string.IsNullOrWhiteSpace(targetYear))
+            {
+                return new DataSet("EmptyResult");
+            }
+
+            // DAL part
+            DALBookCatalog bookCatalog = new DALBookCatalog();
+            return bookCatalog.GetBooksByYear(yearOperator, targetYear);
+        }
     }
 }

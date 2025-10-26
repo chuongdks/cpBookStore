@@ -75,7 +75,7 @@ namespace BookStoreDATA
         }
 
         // Seperate searching feature but it get book by year
-        public DataSet GetBookByYear(string  yearOperator, string targetYear)
+        public DataSet GetBooksByYear(string  yearOperator, string targetYear)
         {
             // create a new dataset
             DataSet dsSearchResults = new DataSet("SearchResults");
