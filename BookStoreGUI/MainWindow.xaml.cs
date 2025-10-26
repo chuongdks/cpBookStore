@@ -252,10 +252,31 @@ namespace BookStoreGUI
             try
             {
                 // Business layer
-                dsBookCat = bookCatalog.SearchBooksByYear(selectedOperator, targetYear);
+                DataSet dsSearchResults = bookCatalog.SearchBooksByYear(selectedOperator, targetYear);
 
-                // Update/Refresh GUI view - similar to UpdateBookCatalogView() but no GetBookInfo()
-                this.DataContext = dsBookCat.Tables["Category"].DefaultView;
+                // keeps the Category table and the DataRelation intact.
+                dsBookCat.Tables["BookData"].Rows.Clear();
+
+                // Import the new filtered rows into the main DataSet's BookData table (This part feels like spaghetti code)
+                if (dsSearchResults.Tables.Contains("BookData"))
+                {
+                    foreach (DataRow row in dsSearchResults.Tables["BookData"].Rows)
+                    {
+                        dsBookCat.Tables["BookData"].ImportRow(row);
+                    }
+                }
+
+                // Force GUI refresh by resetting the DataContext or forcing the ComboBox to update.
+                int selectedIndex = categoriesComboBox.SelectedIndex;
+                if (selectedIndex > -1)
+                {
+                    categoriesComboBox.SelectedIndex = -1;
+                    categoriesComboBox.SelectedIndex = selectedIndex;
+                }
+
+                // search result message
+                int count = dsBookCat.Tables["BookData"].Rows.Count;
+                MessageBox.Show($"Found {count} book(s) published {selectedOperator.ToLower()} {targetYear}.", "Search Results");
             }
             catch (Exception ex)
             {
