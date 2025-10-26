@@ -74,6 +74,52 @@ namespace BookStoreDATA
             return dsBooks;
         }
 
+        // Seperate searching feature but it get book by year
+        public DataSet GetBookByYear(string  yearOperator, string targetYear)
+        {
+            // create a new dataset
+            DataSet dsSearchResults = new DataSet("SearchResults");
+            string operatorSymbol;
+
+            // switch the year operator symbol
+            switch (yearOperator.ToLower())
+            {
+                case "before":
+                    operatorSymbol = "<";
+                    break;
+                case "after":
+                    operatorSymbol = ">";
+                    break;
+                case "in":
+                    operatorSymbol = "=";
+                    break;
+                default:
+                    operatorSymbol = "=";
+                    break;
+            }
+
+            // sql stuff
+            try
+            {
+                // $ icon allow variable
+                String strSQL =
+                "SELECT ISBN, CategoryID, Title, Author, Price, SupplierId, Year, Edition, Publisher " +
+                "FROM BookData " +
+                $"WHERE CAST(Year AS INT) {operatorSymbol} @TargetYear";
+
+                // execute the query
+                SqlCommand cmdSelBook = new SqlCommand(strSQL, conn);
+                cmdSelBook.Parameters.AddWithValue("@TargetYear", targetYear);
+                SqlDataAdapter daBook = new SqlDataAdapter(cmdSelBook);
+                daBook.Fill(dsSearchResults, "BookData");       // Create new DataTable named "BookData" inside the DataSet "dsSearchResults"
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return dsSearchResults;
+        }
+
         // Method to call the 'insertBook' stored procedure
         public bool InsertBook(string xmlBook)
         {
